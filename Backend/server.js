@@ -1,6 +1,10 @@
 const express=require("express")
 const app=express()
 const mongoose=require("mongoose")
+const cors=require("cors")
+
+app.use(express.json())
+app.use(cors())
 
 mongoose.connect('mongodb+srv://divyanshchamoli:wxvn7144@cluster0.qrzriqj.mongodb.net/todoMERN')
 .then(()=>console.log("connected"))
@@ -15,15 +19,8 @@ const TodoSchema=new mongoose.Schema({
 const Todo=mongoose.model("Todo",TodoSchema);
 
 app.post('/addTodo',async (req,res)=>{
-    const sampleTitle="Go to gym"
-    const sampleDescription="Go to gym from 6-8"
-    const sampleCompleted=false;
-    const todoObj={
-        title: sampleTitle,
-        description: sampleDescription,
-        completed: sampleCompleted
-    }
-    const newTodo=new Todo(todoObj)
+    //Fetched from frontend
+    const newTodo=new Todo(req.body)
     await newTodo.save()
     res.json({
         msg: "Todo successfully added!"
