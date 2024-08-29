@@ -14,12 +14,9 @@ function AddTodo() {
                 'Content-type': 'application/json; charset=UTF-8',
             },
         })
-        // .then((res)=>{
-        //     return res.json()
-        // })
-        // .then((data)=>{
-        //     console.log(data)
-        // })
+        .then((res)=>{
+            return res.json()
+        })
         setTitle("")
         setDescription("")
     }

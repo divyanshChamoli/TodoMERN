@@ -35,10 +35,20 @@ app.post('/addTodo',async (req,res)=>{
     })
 })
 
-app.post('/markAsComplete',(req,res)=>{
-    const todoId=1
+app.put('/markAsComplete',async (req,res)=>{
+    const todoId=req.body.id
+    await Todo.updateOne({"_id":todoId},
+        {$set:{"completed":true}})
     res.json({
         msg: "Marked Complete" 
+    })
+})
+
+app.delete('/deleteTodo/:id',async(req,res)=>{
+    const id=req.params.id;
+    await Todo.deleteOne({_id:id})
+    res.json({
+        msg:"successfully deleted"
     })
 })
 
