@@ -18,6 +18,14 @@ const TodoSchema=new mongoose.Schema({
 
 const Todo=mongoose.model("Todo",TodoSchema);
 
+app.get('/viewTodos',async (req,res)=>{
+    const todos=await Todo.find({})
+    // console.log(todos)
+    res.json({
+        todos : todos
+    })
+})
+
 app.post('/addTodo',async (req,res)=>{
     //Fetched from frontend
     const newTodo=new Todo(req.body)
@@ -31,13 +39,6 @@ app.post('/markAsComplete',(req,res)=>{
     const todoId=1
     res.json({
         msg: "Marked Complete" 
-    })
-})
-
-app.get('/viewTodos',(req,res)=>{
-    const todos=[]
-    res.json({
-        todos : todos
     })
 })
 
