@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
-function RenderTodo() {
+function RenderTodo({todos,setTodos}) {
   let count=1
-  const [todos,setTodos]=useState([])
   useEffect(()=>{
     fetch("http://localhost:3000/viewTodos")
     .then((res)=>{

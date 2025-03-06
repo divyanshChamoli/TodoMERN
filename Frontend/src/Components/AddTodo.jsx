@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import RenderTodo from './RenderTodo'
 
-function AddTodo() {
+function AddTodo({todos,setTodos}) {
     const sendToServer=()=>{        
         fetch("http://localhost:3000/addTodo", {
             method: 'POST' ,
@@ -17,6 +17,7 @@ function AddTodo() {
         .then((res)=>{
             return res.json()
         })
+        setTodos([...todos,{title:title,description:description,completed:false}])
         setTitle("")
         setDescription("")
     }
